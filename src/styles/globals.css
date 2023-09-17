@@ -2,26 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
+  font-family: "Nunito", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@keyframes snakeAnimation {
+  0% {
+    border-color: transparent;
+  }
+  20% {
+    border-color: red;
+  }
+  40% {
+    border-color: transparent;
+  }
+  /* Додайте більше кроків для більшої "змійки" */
+}
+
+.snake-border.animated {
+  animation: snakeAnimation 2s infinite;
+  animation-delay: 0.5s; /* Затримка анімації на 0.5 секунд */
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  background-color: #ff0000; /* Колір кола */
+  border-radius: 0; /* Початковий радіус (нульовий) */
+  animation: drawCircle 2s linear; /* Анімація триватиме 2 секунди */
+}
+
+@keyframes drawCircle {
+  to {
+    border-radius: 50%; /* Повний радіус (коло) */
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/*  */
+
+.menu-button {
+  cursor: pointer;
+}
+
+.line {
+  stroke: #000;
+  stroke-width: 2;
+  transition:
+    stroke-dasharray 0.3s,
+    stroke-dashoffset 0.3s;
+}
+
+.line1 {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 0;
+}
+
+.line2 {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 0;
+}
+
+.menu-open .line1 {
+  stroke-dashoffset: 30;
+}
+
+.menu-open .line2 {
+  stroke-dashoffset: -20;
+}
+
+/*  */
+
+.swipe-transition {
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
 }
